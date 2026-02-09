@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>İyi Ki Doğdun Naslı 🎉</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .start-screen, .main-screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .start-screen button {
+      padding: 18px 40px;
+      font-size: 22px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      background: #ff4d6d;
+      color: white;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    .start-screen button:hover { transform: scale(1.05); background: #ff1f4a; }
+
+    .main-screen { display: none; }
+
+    h1 {
+      font-size: 48px;
+      color: white;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation: pop 1s ease-out;
+      z-index: 2;
+    }
+
+    .message-box {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.9);
+      padding: 20px 25px;
+      border-radius: 20px;
+      max-width: 500px;
+      font-size: 18px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: pop 1.5s ease-out;
+    }
+
+    .cake { font-size: 90px; margin: 15px 0; animation: bounce 2s infinite; }
+
+    @keyframes bounce {
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-15px)}
+    }
+
+    @keyframes pop { 0%{transform:scale(0.5);opacity:0} 100%{transform:scale(1);opacity:1} }
+
+    .balloon {
+      position: absolute;
+      bottom: -120px;
+      width: 60px;
+      height: 80px;
+      border-radius: 50%;
+      animation: float 8s linear forwards;
+    }
+
+    .balloon::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 50px;
+      background: rgba(0,0,0,0.2);
+      left: 50%;
+      top: 80px;
+      transform: translateX(-50%);
+    }
+
+    @keyframes float { from{transform:translateY(0)} to{transform:translateY(-120vh)} }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: red;
+      top: -10px;
+      animation: confetti 5s linear forwards;
+    }
+
+    @keyframes confetti { from{transform:translateY(0)} to{transform:translateY(120vh) rotate(720deg)} }
+  </style>
+</head>
+<body>
+
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_42b0b5b7d7.mp3" type="audio/mpeg">
+</audio>
+
+<div class="start-screen">
+  <button onclick="start()">🎈 Başlamak için Tıkla 🎈</button>
+</div>
+
+<div class="main-screen">
+  <h1>🎉 Doğum Günün Kutlu Olsun Naslıcımm 🎉</h1>
+  <div class="cake">🎂</div>
+  <div class="message-box">
+    Canım Naslı 💖<br><br>
+    Hatırlıyor musun, yayında CS2 oynarken shorttan arkası dönük adamı bir türlü vuramamıştın 😄 O an hepimizi hem güldürmüş hem de yüzümüzde kocaman bir tebessüm bırakmıştı. İşte o anlardan biri, seni sen yapan en güzel detaylardan 💫<br><br>
+    Senin o saf heyecanın, içtenliğin ve gülüşün var ya… İyi ki varsın dedirten cinsten. Hayatıma kattığın kahkaha, samimiyet ve güzel anılar için sana çok teşekkür ederim. Hep böyle kal, hep gül, hep mutlu ol 🥹💖<br><br>
+    Nice sağlıklı, huzurlu, bol kahkahalı ve unutulmaz yaşlara… Doğum günün kutlu olsun Naslıcımm 🎂🎈
+  </div>
+</div>
+
+<script>
+function start() {
+  document.querySelector('.start-screen').style.display = 'none';
+  document.querySelector('.main-screen').style.display = 'flex';
+  document.getElementById('music').play();
+  createBalloons();
+  createConfetti();
+}
+
+function createBalloons() {
+  const colors = ['#ff4d6d', '#ffd166', '#06d6a0', '#4d96ff', '#c77dff'];
+  for (let i = 0; i < 25; i++) {
+    const balloon = document.createElement('div');
+    balloon.className = 'balloon';
+    balloon.style.left = Math.random() * 100 + 'vw';
+    balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+    balloon.style.animationDuration = 6 + Math.random() * 4 + 's';
+    document.body.appendChild(balloon);
+    setTimeout(() => balloon.remove(), 10000);
+  }
+}
+
+function createConfetti() {
+  const colors = ['#ff4d6d', '#ffd166', '#06d6a0', '#4d96ff', '#c77dff'];
+  for (let i = 0; i < 120; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    confetti.style.left = Math.random() * 100 + 'vw';
+    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDuration = 3 + Math.random() * 3 + 's';
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 6000);
+  }
+}
+</script>
+
+</body>
+</html>
